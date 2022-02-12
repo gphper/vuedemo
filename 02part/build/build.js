@@ -1,0 +1,1 @@
+(()=>{var r={855:r=>{r.exports={n:100,add:function(r,o){return r+o}}}},o={};function t(n){var e=o[n];if(void 0!==e)return e.exports;var s=o[n]={exports:{}};return r[n](s,s.exports,t),s.exports}(()=>{const{n:r,add:o}=t(855);let n=o(r,200);console.log(n)})()})();
