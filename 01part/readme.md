@@ -4,6 +4,8 @@
 
 * 安装包
 
+npm 库地址 https://www.npmjs.com/
+
 `npm install jquery` -g 全局安装
 
 * 移除包
@@ -55,4 +57,35 @@ PS F:\vuedemo\01part> npm run test
                3 个文件            644 字节
                3 个目录 374,420,021,248 可用字节
 ```
+
+
+
+###	Babel练习
+
+* 安装babel
+
+`npm install babel-cli -g --save-dev`
+
+* 新建文件
+
+```.babelrc
+{
+    "presets": ["es2015","stage-2"],
+    "plugins": ["transform-runtime"]
+}
+```
+
+* 安装库
+
+`npm install babel-core babel-preset-es2015 babel-plugin-transform-runtime babel-preset-stage-2 --save-dev`
+
+* 添加脚本
+
+```
+"scripts": {
+    "build": "babel src -w -d lib"
+},
+```
+
+npm run build
 
