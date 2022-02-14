@@ -25,3 +25,32 @@
 npm install css-loader@5.0.1 -D
 ```
 
+
+
+###	检验JS
+
+* 安装 `npm i eslint-loader eslint exlint-config-airbnb-base eslint-plugin-import -D`
+
+```package.json
+"eslintConfig":{
+    "extends":"airbnb-base"
+  }
+```
+
+```webpack.config.js
+{
+                test:/\.js$/,
+                exclude:/node_modules/,
+                loader:"eslint-loader",
+                options:{
+                    fix:true
+                }
+},
+```
+
+
+
+###	安装服务器
+
+* npm install -D webpack-dev-server
+* webpack server

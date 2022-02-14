@@ -47,6 +47,14 @@ module.exports = {
             {test:/\.html$/,use:[{
                 loader:'html-loader',
             }]},
+            {
+                test:/\.js$/,
+                exclude:/node_modules/,
+                loader:"eslint-loader",
+                options:{
+                    fix:true
+                }
+            },
             {test:/\.css/,use:[{
                 loader:MiniCssExtractPlugin.loader,
                 options:{
