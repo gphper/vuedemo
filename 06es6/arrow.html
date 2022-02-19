@@ -1,0 +1,43 @@
+<!--
+ * @Description: 
+ * @Author: gphper
+ * @Date: 2022-02-16 20:26:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TITLE</title>
+</head>
+<body>
+    <script>
+        function fun(x){
+            return x * x;
+        }
+
+        const func1 = (x) => {return x * x};
+        console.log(func1(10))
+
+        let username = "gphper";
+        let temp = `
+            my name is ${username}
+        `;
+        console.log(temp);
+
+        class Person{
+            constructor(name ,age){
+                this.name = name
+                this.age = age
+            }
+        
+            say(){
+                console.log(this.name);
+                console.log(this.age);
+            }
+        }
+
+        let person = new Person("gphper",18)
+        person.say();
+    </script>
+</body>
+</html>
