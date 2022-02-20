@@ -15,7 +15,36 @@
 
 `v-html` 解析并插入html标签
 
-v-model 双向绑定
+v-model 双向绑定在表单中使用的多
+
+```
+<template>
+  <label>
+    <input type="radio" value="1" v-model="sex">男
+  </label>
+  <label>
+    <input type="radio" value="2" v-model="sex">女
+  </label>
+</template>
+
+<script>
+
+export default {
+  name: 'App',
+  data(){
+    return{
+      sex:2
+    }
+  }
+}
+</script>
+```
+
+.lazy 懒加载
+
+.number 转化为数字
+
+.trim 删除空格
 
 `v-bind` 绑定属性值 ，可以使用  `:属性`的方式简写
 
