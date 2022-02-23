@@ -10,7 +10,9 @@
             {{item}}<br>
         </span>
         <br>
-        <button @click="this.$parent.appshow()">父节点输出console</button>
+        <button @click="this.$parent.appshow()">父节点输出console</button> <br/>
+        <slot :user="user" name="hello">hello</slot>
+        <slot name="world">world</slot>
         <slot></slot>
     </div>
 </template>
@@ -20,7 +22,10 @@ export default({
     name:"HelloWorld",
     data(){
         return{
-            
+            user:{
+                "username":"gphper",
+                "sex":"男"
+            }
         }
     },
     // props:["title"],

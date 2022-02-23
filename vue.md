@@ -560,3 +560,69 @@ export default({
 </template>
 ```
 
+* 具名插槽
+
+```HelloWorld.vue
+<template>
+    <div>
+        <slot name="hello">hello</slot>
+        <slot name="world">world</slot>
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+export default({
+    name:"HelloWorld",
+})
+</script>
+
+```
+
+```app.vue
+<template>
+  <HelloWorld>
+    <template v-slot:hello>
+      <h4>hellooooooooooo</h4>
+    </template>
+    <template v-slot:default>
+      <h4>hell-default</h4>
+    </template>
+  </HelloWorld>
+</template>
+```
+
+* 插槽子级向父级传值
+
+```HelloWorld.vue
+<template>
+    <div>
+        <slot :user="user" name="hello">hello</slot>
+    </div>
+</template>
+
+<script>
+export default({
+    name:"HelloWorld",
+    data(){
+        return{
+            user:{
+                "username":"gphper",
+                "sex":"男"
+            }
+        }
+    }
+})
+</script>
+```
+
+```app.vue
+<template>
+  <HelloWorld ref="hello" @myshow="myshow" :article="articles" title="Test Hello World">
+    <template v-slot:hello="hellodata">
+      <h4>{{hellodata.user.username}}</h4>
+    </template>
+  </HelloWorld>
+</template>
+```
+
