@@ -17,7 +17,7 @@
 
 v-model 双向绑定在表单中使用的多
 
-```
+```vue
 <template>
   <label>
     <input type="radio" value="1" v-model="sex">男
@@ -316,4 +316,227 @@ export default {
   }
 </style>
 ```
+
+
+
+##	组件
+
+###	通信
+
+* 样式只在当前组件有效在子组件无效使用 `<style scoped>`
+
+```HeloWorld.vue
+<template>
+    <div>
+        <h1>{{msg}}</h1>
+    </div>
+</template>
+
+<script>
+
+export default({
+    name:"HelloWorld",
+    data(){
+        return{
+            msg:"hello world"
+        }
+    }
+})
+</script>
+```
+
+```App.vue
+<template>
+  <HelloWorld></HelloWorld>
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+}
+</script>
+```
+
+* 传父级组件给子集组件传参数 props
+
+```app.vue
+<template>
+  <HelloWorld :article="articles" title="Test Hello World"><h4>hellooooooooooo</h4></HelloWorld>
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+  data(){
+    return {
+      articles:[
+        "php",
+        "golang"
+      ]
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
+```
+
+```
+<template>
+    <div>
+        <h1>{{title}}</h1>
+        <span v-for="item in article" :key="item">
+            {{item}}<br>
+        </span>
+    </div>
+</template>
+
+<script>
+import { stringifyStyle } from "@vue/shared"
+export default({
+    name:"HelloWorld",
+    data(){
+        return{
+            
+        }
+    },
+    // props:["title"],
+    props:{
+        title:{
+            type:String,
+            default:'######'
+        },
+        article:{
+            type:Array,
+            required:true,
+        }
+    }
+})
+</script>
+```
+
+* 子组件传递父组件 $emit()
+
+```
+<template>
+  <HelloWorld @myshow="myshowapp" title="Test Hello World"></HelloWorld>
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+  methods:{
+    myshowapp(msg){
+      console.log("app console:" + msg);
+    }
+  }
+}
+</script>
+```
+
+```
+<template>
+    <div>
+        <h1 @click="shwotitle('hello')">{{title}}</h1>
+    </div>
+</template>
+
+<script>
+export default({
+    name:"HelloWorld",
+    data(){
+        return{
+            
+        }
+    },
+    methods: {
+        shwotitle(t){
+            this.$emit('myshow',t);
+        }
+    },
+})
+</script>
+
+```
+
+* 子组件访问父组件使用 $parent 和 $root
+* 父组件访问子组件 $refs
+
+```app.vue
+<template>
+  <HelloWorld ref="hello" @myshow="myshow" title="Test Hello World"></HelloWorld>
+
+  <button @click="this.$refs.hello.childshow">子组件console</button>
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+  methods:{
+    myshow(msg){
+      console.log("app console:" + msg);
+    },
+    appshow(){
+      console.log("app show")
+    }
+  }
+}
+</script>
+```
+
+```HelloWorld.vue
+<template>
+    <div>
+        <h1 @click="shwotitle('hello')">{{title}}</h1>
+        <span v-for="item in article" :key="item">
+            {{item}}<br>
+        </span>
+        <br>
+        <button @click="this.$parent.appshow()">父节点输出console</button>
+
+    </div>
+</template>
+
+<script>
+export default({
+    name:"HelloWorld",
+    data(){
+        return{
+            
+        }
+    },
+    props:["title"],
+    methods: {
+        shwotitle(t){
+            this.$emit('myshow',t);
+        },
+        childshow(){
+            console.log("child show console")
+        }
+    },
+})
+</script>
+```
+
+###	插槽  
+
+使用`<solt></solt>`标签
 
