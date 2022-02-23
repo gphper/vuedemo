@@ -11,7 +11,7 @@
         </span>
         <br>
         <button @click="this.$parent.appshow()">父节点输出console</button>
-
+        <slot></slot>
     </div>
 </template>
 

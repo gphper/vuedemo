@@ -540,3 +540,23 @@ export default({
 
 使用`<solt></solt>`标签
 
+```HelloWorld.vue
+<template>
+    <div>
+        <h1 @click="shwotitle('hello')">{{title}}</h1>
+        <span v-for="item in article" :key="item">
+            {{item}}<br>
+        </span>
+        <br>
+        <button @click="this.$parent.appshow()">父节点输出console</button>
+        <slot></slot>
+    </div>
+</template>
+```
+
+```app.vue
+<template>
+  <HelloWorld ref="hello" @myshow="myshow" :article="articles" title="Test Hello World"><h4>hellooooooooooo</h4></HelloWorld>
+</template>
+```
+
