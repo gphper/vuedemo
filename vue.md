@@ -626,3 +626,161 @@ export default({
 </template>
 ```
 
+
+
+##	生命周期
+
+```vue
+  beforeCreate(){
+    console.log("实例创建之前自动调用 beforeCreated()")
+  },
+
+  created(){
+    this.$nextTick(()=>{
+      console.log("延迟调用created()")
+    })
+    console.log("实例创建时调用created()")
+  },
+
+  beforeMount(){
+    console.log("编译模板之前调用beforeMount()")
+  },
+
+  mounted(){
+    console.log("编译模板时调用mounted()")
+  },
+
+  beforeUpdate(){
+    console.log("更新前调用beforeUpdate()")
+  },
+
+  updated(){
+    console.log("模板内容更新完成")
+  },
+
+  beforeUnmount(){
+    console.log("实例销毁之前调用")
+  },
+
+  unmounted(){
+    console.log("实例销毁完成时调用")
+  },
+
+  activated(){
+    console.log("缓存数据恢复之前调用")
+  },
+
+  deactivated(){
+    console.log("通过keep-alive缓存之前调用")
+  },
+```
+
+
+
+## 路由(vue-router)
+
+* 安装组件 `npm i vue-router`
+
+* 实例化
+
+  ```route.js
+  import { createRouter, createWebHashHistory } from "vue-router";
+  import About from "../components/About.vue";
+  import Home from "../components/Home.vue";
+  
+  const routes = [
+      {
+          path:"/home",
+          name:"Home",
+          component:Home
+      },
+      {
+          path:"/about",
+          name:"About",
+          component:About
+      }
+  ];
+  
+  const router = createRouter({
+      history:createWebHashHistory(process.env.BASE_URL),
+      routes
+  })
+  
+  export default router*
+  ```
+
+* 引用router
+
+  ```main.js
+  import router from './router'
+  
+  createApp(App).use(router).mount('#app')
+  ```
+
+* 模板中使用
+
+  ```app.vue
+  <router-link to="/home">
+      主页
+  </router-link>
+  |
+  <router-link to="/about">
+      关于我们
+  </router-link>
+  
+  <router-view></router-view>
+  ```
+
+### 懒加载
+
+```
+const About = ()=>import('../components/About.vue')
+const routes = [
+    {
+        path:"/about",
+        name:"About",
+        component:About,
+    }
+];
+```
+
+###	替换a标签
+
+```
+使用插槽的方式替换
+<router-link to="/about" custom v-slot="{ navigate }">
+   <button @click="navigate">关于我们</button>
+</router-link>
+
+<button @click="$router.push('/')">个人中心</button>
+
+<button @click="$router.go(-1)">返回</button>
+
+```
+
+###	嵌套子路由
+
+* 使用 path:'' 设置默认页面
+
+```javascript
+{
+        path:"/personal",
+        name:"Personal",
+        component:Personal,
+        children:[
+            {
+                path:'',
+                component:Order
+            },
+            {
+                path:"order",
+                component:Order,
+            },
+            {
+                path:"setting",
+                component:Setting,
+            }
+        ]
+}
+```
+
