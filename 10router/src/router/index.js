@@ -9,6 +9,7 @@ const About = ()=>import('../components/About.vue')
 const Personal = ()=>import('../components/Personal.vue')
 const Order = ()=>import("../components/Order.vue")
 const Setting = ()=>import("../components/Setting.vue")
+const Article = ()=>import("../components/Article.vue")
 
 const routes = [
     {
@@ -39,6 +40,10 @@ const routes = [
             {
                 path:"setting",
                 component:Setting,
+            },
+            {
+                path:"article/:id",
+                component:Article,
             }
         ]
     }

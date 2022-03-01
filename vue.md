@@ -784,3 +784,32 @@ const routes = [
 }
 ```
 
+###	参数传递
+
+* params 传递  :id 的形式
+
+```
+{
+      path:"article/:id",
+      component:Article,
+}
+```
+
+```
+{{$route.params.id}}
+```
+
+* query  ?id=10
+
+```
+<router-link :to="{path:'/personal/order',query:{order_id:'ORDERYTIKJD'}}">个人订单</router-link><br>
+```
+
+可以使用对象形式传递，接收时使用
+
+```
+{{$route.query.order_id}}
+```
+
+
+

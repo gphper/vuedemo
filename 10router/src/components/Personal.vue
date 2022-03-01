@@ -5,8 +5,10 @@
 -->
 <template>
     <span>个人中心</span><br>
-    <router-link to="/personal/order">个人订单</router-link><br>
-    <router-link to="/personal/setting">设置中心</router-link>
+    <router-link :to="{path:'/personal/order',query:{order_id:'ORDERYTIKJD'}}">个人订单</router-link><br>
+    <router-link to="/personal/setting">设置中心</router-link><br>
+    <router-link to="/personal/article/1">文章一</router-link><br>
+    <router-link to="/personal/article/2">文章二</router-link>
     <router-view class="content"></router-view>
 </template>
 

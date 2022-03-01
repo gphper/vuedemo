@@ -1,14 +1,15 @@
 <!--
  * @Description: 
  * @Author: gphper
- * @Date: 2022-02-25 21:54:54
+ * @Date: 2022-03-01 21:26:12
 -->
 <template>
-    <h1>我的订单:{{$route.query.order_id}}</h1>
+    <h1>文章 {{ $route.params.id }}详情</h1>
 </template>
 
 <script>
 export default {
-    name:"OrderPage"
+    name:"ArticlePage",
+
 }
 </script>
