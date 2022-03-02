@@ -813,3 +813,72 @@ const routes = [
 
 
 
+###	重定向
+
+* url方式
+
+  ```
+  {
+     path:"/",
+     redirect:"/home"
+  }
+  ```
+
+* 指定name方式
+
+  ```
+  {
+     path:"/",
+     redirect:{name:"Home"}
+  }
+  ```
+
+* 函数方式
+
+  ```
+  {
+     path:"/",
+     redirect: to=>{
+         return {path:"/home",query:{name:to.query.id}}
+     }
+  }
+  ```
+
+###	别名
+
+* 使用alias
+
+```
+{
+        path:"/about",
+        name:"About",
+        alias:"/gphper",
+        component:About
+}
+```
+
+###	导航守卫
+
+* 前置
+
+  ```
+  router.beforeEach((to,from,next)=>{
+      document.title=to.meta.title
+      next()
+  })
+  ```
+
+  
+
+* 后置
+
+  ```
+  router.afterEach
+  ```
+
+* 路由独享模式
+
+
+
+##	Vuex（全局变量）
+
