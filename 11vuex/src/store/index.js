@@ -4,6 +4,16 @@
  * @Date: 2022-03-03 20:34:30
  */
 import { createStore } from 'vuex';
+const user = {
+  state:{
+    username:"gphper"
+  },
+  getters:{
+    getname(state){
+      return "my name is " + state.username;
+    }
+  }
+}
 
 export default createStore({
   state: {
@@ -39,5 +49,6 @@ export default createStore({
     }
   },
   modules: {
+    user
   }
 })

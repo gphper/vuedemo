@@ -18,6 +18,9 @@
   <div>vuex中的getter相差一个key值 {{$store.getters.sum1(20)}} </div>
   <hr/>
   <button @click="act">action</button>
+  <hr/>
+  <div>获取user中的state {{$store.state.user.username}}</div>
+  <div>获取user中的getter {{$store.getters.getname}}</div>
 </template>
 
 <script>
