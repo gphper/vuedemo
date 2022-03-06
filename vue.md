@@ -882,3 +882,166 @@ const routes = [
 
 ##	Vuex（全局变量）
 
+
+
+##	组合式API
+
+###	API
+
+ref创建响应式对象,声明对象reactive
+
+```vue
+<template>
+    demo component num : {{num}}
+    <button @click="add">demo ++</button>
+    <br>
+    user中的 {{user.username}}<br>
+    <input type="text" v-model="user.username">
+    <hr/>
+    toRefs中 {{username}}<br>
+    <input type="text" v-model="username">
+</template>
+
+<script>
+import { reactive, ref, toRefs } from "vue"
+
+export default {
+    name:"DemoComm",
+    setup() {
+        let num = ref(0)
+        let user = reactive({
+            username:"gphper",
+            sex:"男",
+            age:18
+        })
+
+        const add = ()=>{
+            num.value++
+        }
+        return {num,add,user,...toRefs(user)}
+    },
+}
+</script>
+```
+
+计算属性的使用
+
+```vue
+const person = computed(()=>{
+     return "姓名："+user.username+"年龄："+user.age+"性别："+user.sex;
+})
+```
+
+watch 监听器 默认匿名函数里面包含哪个值默认监听哪个值
+
+```
+//默认监听
+watch(()=>{
+     console.log(user.username + "username 被修改")
+})
+```
+
+```
+//指定监听
+watch(user,()=>{
+    console.log(user);
+})
+```
+
+```
+//监控新旧值变化 reactive对象监控
+watch(()=>user.username,(newValue,oldValue)=>{
+     console.log(newValue);
+     console.log(oldValue)
+})
+//非对象监控
+watch(a,(newValue,oldValue)=>{
+     console.log(newValue);
+     console.log(oldValue)
+})
+//多数据监控
+watch([()=>user.username,()=>user.sex],([newValue1,newVaule2],[oldValue1,oldValue2])=>{
+    console.log(newValue1+"-------"+oldValue1);
+    console.log(newVaule2+"-------"+oldValue2);
+},{immediate:true})
+```
+
+
+
+###	生命周期
+
+```
+import { onBeforeMount } from "vue"
+
+export default {
+    name:"DemoComm",
+    setup() {
+     
+        onBeforeMount(()=>{
+            console.log("周期函数");
+        })
+
+    },
+}
+```
+
+Provide和Inject
+
+```
+<script>
+import { provide } from '@vue/runtime-core';
+export default {
+  setup() {
+    
+    const title = ref("HomeView 提供的数据")
+    provide("title",title.value)
+
+  },
+}
+</script>
+```
+
+```
+<script>
+import { inject } from '@vue/runtime-core'
+export default {
+  name: 'HelloWorld',
+  setup(props,context){
+
+    const titleparent = inject("title")
+
+    return {titleparent}
+  }
+}
+</script>
+```
+
+###	路由
+
+```vue
+<script>
+import { onBeforeRouteLeave, useRoute } from 'vue-router'
+export default {
+  name: 'HelloWorld',
+  setup(props,context){
+    //获取路径
+    const route = useRoute()
+    const fullPath = route.fullPath
+
+    onBeforeRouteLeave(()=>{
+      console.log('leave route')
+    })
+
+    return {fullPath}
+  }
+}
+</script>
+```
+
+###	Vuex
+
+```
+import {userStore} from 'vuex';
+const vuex = useStore()
+```
+
